@@ -1,0 +1,68 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ div#invoiceapp_client_info,
+ div#invoiceapp_quote_info,
+ div#invoiceapp_invoice_info {
+    margin-top: -1.56em;
+}
+div#invoiceapp_client_info input,
+div#invoiceapp_quote_info input, 
+div#invoiceapp_invoice_info input,
+input#invoice-due-date,
+.invoice-app-item input{
+    border-radius: 4px;
+    border: 1px solid #E5E5E5;
+    padding: .4em;
+    margin-right: 5px;
+}
+.invoiceapp-invoice-number{
+	float: right;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 2px 9px;
+}
+input.disabled.line-items-sub-total,
+input.disabled.line-items-tax-total,
+input.disabled.line-items-total {
+    text-align: right;
+}
+#quote-valid-for, #tax-rate{
+	width: 50px;
+}
+table.widefat.invoice-app-item thead .header th {
+    color: #fff;
+}
+tr.header {
+    background-color: #333;
+    color: #fff;
+    margin-bottom: 3.5em;
+    padding-bottom: 5em;
+}
+.header th {
+    padding: 5px 5px;
+}
+#invoice_add_another{
+    margin-right: 1.3em;
+    float: right;
+    /*text-align:right;padding-top:20px;padding-bottom:20px;*/
+}
+.invoice_app button.remove {
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #E3886A;
+    padding: 0em 0em;
+    margin-top: .3em;
+    font-size: 17px;
+}
+/*.post-type-invoice_app_invoices div#message p > a {
+    display: none;
+}
+.post-type-invoice_app_invoices a#post-preview {
+    display: none;
+}*/
+.invoice_app #minor-publishing-actions {display: none;}
+.invoice_app #misc-publishing-actions {display: none;}
