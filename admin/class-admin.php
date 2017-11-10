@@ -78,9 +78,9 @@ class Invoice_App_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/invoice-app-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'jquery-ui-datepicker', plugins_url( 'css/jquery.ui.datepicker.css', __FILE__ ) );
-		wp_enqueue_style( 'font-awesome', plugins_url('css/font-awesome.min.css', __FILE__) );		
+		wp_enqueue_style( 'font-awesome', plugins_url('css/font-awesome.min.css', __FILE__) );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Invoice_App_Admin {
 		 * class.
 		 */
 		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/invoice-app-admin.js', array( 'jquery' ), $this->version, false, 99 );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false, 99 );
 
 	}
 
@@ -115,7 +115,7 @@ class Invoice_App_Admin {
 		if (!empty($_REQUEST['invoiceid'])) {
 			return invoice_to_pdf( intval( $_REQUEST['invoiceid'] ) );
 		} else {
-			wp_die('Unable to process your request.');
+			wp_die('Unable to process your request.', $this->plugin_name);
 		}
 	}
 
@@ -231,8 +231,7 @@ class Invoice_App_Admin {
 						'desc' => __( 'Add a custom starting point for invoice numbering. (Leave this box blank to start from 1.)', 'invoice-app' ),
 						'type' => 'number',
 						'size' => 'small',
-						'type' => 'text',
-					),	
+					),
 					'invoice_notes' => array(
 						'id'   => 'invoice_notes',
 						'label' => __( 'Invoice Notes', 'invoice-app' ),
@@ -253,8 +252,7 @@ class Invoice_App_Admin {
 						'desc' => __( '%', 'invoice-app' ),
 						'type' => 'number',
 						'size' => 'small',
-						'type' => 'text',
-					),	
+					),
 					'currency_code' => array(
 						'id'      => 'currency_code',
 						'label'    => __( 'Currency Code', 'invoice-app' ),
@@ -311,9 +309,9 @@ class Invoice_App_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	/*public function dashboard_widget() {
+	public function dashboard_widget() {
 		wp_add_dashboard_widget('dashboard_widget', 'Invoice App', array(&$this, 'display_widget'));
-	}*/
+	}
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -351,7 +349,7 @@ class Invoice_App_Admin {
 		);
 
 		$messages['invoice_app_clients'] = array(
-			1 => __('Client updated.', ''),
+			1 => __('Client updated.', 'invoice-app'),
 		);
 
 		return $messages;
@@ -369,7 +367,7 @@ class Invoice_App_Admin {
 			'singular_name'         => _x( 'Invoice', 'invoice-app' ),
 			'menu_name'             => __( 'Invoices', 'invoice-app' ),
 			'name_admin_bar'        => __( 'Invoice', 'invoice-app' ),
-			'all_items'             => __( 'Invoices', 'invoice-app' ),
+			'all_items'             => __( 'All Invoices', 'invoice-app' ),
 			'add_new_item'          => __( 'Add New Invoice', 'invoice-app' ),
 			'new_item'              => __( 'New Invoice', 'invoice-app' ),
 			'edit_item'             => __( 'Edit Invoice', 'invoice-app' ),
@@ -409,7 +407,7 @@ class Invoice_App_Admin {
 			'singular_name'         => _x( 'Quote', 'invoice-app' ),
 			'menu_name'             => __( 'Quotes', 'invoice-app' ),
 			'name_admin_bar'        => __( 'Quote', 'invoice-app' ),
-			'all_items'             => __( 'Quotes', 'invoice-app' ),
+			'all_items'             => __( 'All Quotes', 'invoice-app' ),
 			'add_new_item'          => __( 'Add New Quote', 'invoice-app' ),
 			'new_item'              => __( 'New Quote', 'invoice-app' ),
 			'edit_item'             => __( 'Edit Quote', 'invoice-app' ),
@@ -449,7 +447,7 @@ class Invoice_App_Admin {
 			'singular_name'         => _x( 'Client', 'invoice-app' ),
 			'menu_name'             => __( 'Clients', 'invoice-app' ),
 			'name_admin_bar'        => __( 'Client', 'invoice-app' ),
-			'all_items'             => __( 'Clients', 'invoice-app' ),
+			'all_items'             => __( 'All Clients', 'invoice-app' ),
 			'add_new_item'          => __( 'Add New Client', 'invoice-app' ),
 			'new_item'              => __( 'New Client', 'invoice-app' ),
 			'edit_item'             => __( 'Edit Client', 'invoice-app' ),
@@ -521,9 +519,9 @@ class Invoice_App_Admin {
 	 */
 	public function client_details(){
 		if(isset($_GET['action']) && $_GET['action'] == 'edit' ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-edit-client-details.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/edit-client-details.php';
 		} else {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-client-details.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/client-details.php';
 		}
 	}
 
@@ -534,9 +532,9 @@ class Invoice_App_Admin {
 	 */
 	public function quote_details(){
 		if(isset($_GET['action']) && $_GET['action'] == 'edit' ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-edit-quote-details.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/edit-quote-details.php';
 		} else {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-quote-details.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/quote-details.php';
 		}	
 	}
 
@@ -547,9 +545,9 @@ class Invoice_App_Admin {
 	 */
 	public function invoice_details(){
 		if(isset($_GET['action']) && $_GET['action'] == 'edit' ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-edit-invoice-details.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/edit-invoice-details.php';
 		} else {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-invoice-details.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-details.php';
 		}
 	}
 
@@ -559,13 +557,15 @@ class Invoice_App_Admin {
 	 * @since    1.0.0
 	 */
 	public function item_details(){
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/invoice-app-admin-item-details.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/views/item-details.php';
 	}
 
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since    1.0.0
+	 * @param $post_id
+	 * @param $post
 	 */
 	public function save_invoice_app_meta($post_id, $post) {
 
@@ -751,7 +751,7 @@ class Invoice_App_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	/*public function capture_subsubsub_click($query){
+	public function capture_subsubsub_click($query){
 		
 		# Not admin, bail out
 		if ( !is_admin() ) return;
@@ -783,24 +783,28 @@ class Invoice_App_Admin {
 				break;
 		}
 
-	}*/
+	}
 
 	/**
 	 * Edit plugin post type subsubsub links.
 	 *
 	 * @since    1.0.0
 	 */
-	/*public function edit_subsubsub_links($views) {
+	public function edit_subsubsub_links($views) {
 		unset($views['publish']);
 		$type = $this->invoice_app_get_the_type();
+
+		if ($type === 'quote'){
+			return $views;
+		}
+
 		//get statuses
         $statuses = $this->invoice_app_get_statuses($type);
         $active = '';
 		foreach ( $statuses as $status ) {
 
 			if ( $status->count != 0 ){ 
-		    //$views[$status->status] = '<a href="' . esc_url( add_query_arg( array( $type . '_status' => $status->status ) ) ) . '"' 
-		    $views[$status->status] = '<a href="' . esc_url( add_query_arg( $type . '_status', $status->status, admin_url() . 'edit.php?post_type=invoice_app_invoices' ) ) . '"' 
+		    $views[$status->status] = '<a href="' . esc_url( add_query_arg( $type . '_status', $status->status, admin_url() . 'edit.php?post_type=invoice_app_invoices' ) ) . '"'
 		    				. $this->is_current_link($_GET[$type . '_status'], $status->status) 
 		    				.'>' 
 		    				. esc_html( ucfirst($status->status) ) 
@@ -809,14 +813,17 @@ class Invoice_App_Admin {
 			}
 		}
     	return $views;
-	}*/
+	}
 
 	/**
 	 * Check if clicked subsubsub is the active link.
 	 *
 	 * @since 1.0.0
+	 * @param $first
+	 * @param $second
+	 *
+	 * @return string
 	 */
-
 	public function is_current_link($first, $second){
 
 		if ($first == $second)
@@ -828,6 +835,10 @@ class Invoice_App_Admin {
 	 * Count posts by meta_key and meta_value.
 	 *
 	 * @since    1.0.0
+	 * @param $key
+	 * @param $value
+	 *
+	 * @return null|string
 	 */
 	public function invoice_app_get_count( $key, $value ){
 
@@ -846,6 +857,9 @@ class Invoice_App_Admin {
 	 * Get invoice app post type by id.
 	 *
 	 * @since    1.0.0
+	 * @param int $id
+	 *
+	 * @return string
 	 */
 	public function invoice_app_get_the_type( $id = 0 ) {
 
@@ -861,6 +875,9 @@ class Invoice_App_Admin {
 	 * Get available statuses by post type.
 	 *
 	 * @since    1.0.0
+	 * @param $type
+	 *
+	 * @return array
 	 */
 	public function invoice_app_get_statuses($type) {
 
@@ -885,6 +902,9 @@ class Invoice_App_Admin {
 	 * Edit Client post type list table.
 	 *
 	 * @since    1.0.0
+	 * @param $defaults
+	 *
+	 * @return mixed
 	 */
 	public function edit_client_post_list($defaults) {
 
@@ -907,6 +927,8 @@ class Invoice_App_Admin {
 	 * Populate invoice post type list table.
 	 *
 	 * @since    1.0.0
+	 * @param $column_name
+	 * @param $post_ID
 	 */
 	public function add_client_details_to_post_list($column_name, $post_ID) {
 
@@ -937,6 +959,9 @@ class Invoice_App_Admin {
 	 * Edit invoice post type list table.
 	 *
 	 * @since    1.0.0
+	 * @param $defaults
+	 *
+	 * @return mixed
 	 */
 	public function edit_quote_post_list($defaults) {
 
@@ -959,6 +984,8 @@ class Invoice_App_Admin {
 	 * Poplate invoice post type list table.
 	 *
 	 * @since    1.0.0
+	 * @param $column_name
+	 * @param $post_ID
 	 */
 	public function add_quote_details_to_post_list($column_name, $post_ID) {
 
@@ -988,6 +1015,9 @@ class Invoice_App_Admin {
 	 * Edit invoice post type list table.
 	 *
 	 * @since    1.0.0
+	 * @param $defaults
+	 *
+	 * @return mixed
 	 */
 	public function edit_invoice_post_list($defaults) {
 
@@ -1013,6 +1043,8 @@ class Invoice_App_Admin {
 	 * Poplate invoice post type list table.
 	 *
 	 * @since    1.0.0
+	 * @param $column_name
+	 * @param $post_ID
 	 */
 	public function add_invoice_details_to_post_list($column_name, $post_ID) {
 
@@ -1060,7 +1092,7 @@ class Invoice_App_Admin {
 
 	}
 
-    /**
+	/**
 	 * Check for overdue.
 	 *
 	 * @since    1.0.0
