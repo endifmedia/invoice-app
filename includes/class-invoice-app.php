@@ -99,13 +99,13 @@ class Invoice_App {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-invoice-app-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-invoice-app-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-i18n.php';
 
 		/**
 		 * Plugin functions.
@@ -115,13 +115,13 @@ class Invoice_App {
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-invoice-app-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
 
 		/**
 		 * The class responsible for displaying and saving plugin settings in the admin-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/plugin-options.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/plugin-options.php';
 
 		$this->loader = new Invoice_App_Loader();
 
@@ -155,7 +155,6 @@ class Invoice_App {
 
 		$plugin_admin = new Invoice_App_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		//$this->loader->add_action( 'admin_init', $plugin_admin, 'do_options' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_footer', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'setup_postypes' );
@@ -168,9 +167,9 @@ class Invoice_App {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'create_menu' );
 		$this->loader->add_filter( 'admin_body_class', $plugin_admin, 'add_admin_body_class' );
 		# Called only in /wp-admin/edit.php* pages
-		//$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'capture_subsubsub_click' );
-		//$this->loader->add_action( 'views_edit-invoice_app_invoices', $plugin_admin, 'edit_subsubsub_links' );
-		//$this->loader->add_action( 'views_edit-invoice_app_quotes', $plugin_admin, 'edit_subsubsub_links' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'capture_subsubsub_click' );
+		$this->loader->add_action( 'views_edit-invoice_app_invoices', $plugin_admin, 'edit_subsubsub_links' );
+		$this->loader->add_action( 'views_edit-invoice_app_quotes', $plugin_admin, 'edit_subsubsub_links' );
 		$this->loader->add_action( 'wp_ajax_get_preview', $plugin_admin, 'get_pdf_preview' );
 
 		$this->loader->add_filter( 'manage_invoice_app_clients_posts_columns', $plugin_admin, 'edit_client_post_list' );
