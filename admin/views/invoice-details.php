@@ -57,7 +57,7 @@ $invoice_app_settings = get_option('invoice_app_settings');
 			<th><label for="invoice-status">Invoice Status</label></th>
 			<td>
 				<select name="invoice-status">
-					<option></option>
+					<option>--</option>
 					<option value="paid">Paid</option>
 					<option value="sent">Sent</option>
 					<option value="overdue">Overdue</option>
