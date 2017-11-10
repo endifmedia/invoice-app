@@ -61,7 +61,8 @@ global $post;
 					<option></option>
 					<option value="paid" <?php selected( $status, 'paid'); ?>>Paid</option>
 					<option value="sent" <?php selected( $status, 'sent'); ?>>Sent</option>
-					<option value="overdue" <?php selected( $status, 'overdue'); ?>>Overdue</option>	
+					<option value="overdue" <?php selected( $status, 'overdue'); ?>>Overdue</option>
+					<option value="unpaid" <?php selected( $status, 'unpaid'); ?>>Unpaid (loss)</option>
 				</select>
 			</td>
 		</tr>
