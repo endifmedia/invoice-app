@@ -23,6 +23,7 @@ $invoice_app_settings = get_option('invoice_app_settings');
 			<th><label for="invoice-client">Client</th>
 			<td>
 			    <select name="invoice-client">
+				    <option>--</option>
 			    	<?php 
 						$clients = invoice_app_get_clients();
 						foreach($clients as $client){
@@ -76,8 +77,24 @@ $invoice_app_settings = get_option('invoice_app_settings');
 		</tr>
 	</tbody>
 </table>
-<?php 
-/**
-* add other items to this list
-*/
-do_action('other_items'); ?>
+<script type="text/javascript">
+
+	function get_client_rate() {
+		var client = jQuery('select[name=invoice-client]').val();
+		//ajax call
+		jQuery.ajax({
+			url: ajaxurl,
+			type: "POST",
+			data: "action=after_change_client_on_invoice&client=" + client,
+			success: successFunction
+		});
+		function successFunction(result) {
+			if (result != 0){
+				jQuery('.line-item-rate').last().val(parseFloat(result));
+			}
+		}
+	}
+
+	jQuery("body").delegate("select[name=invoice-client]","blur", get_client_rate);
+
+</script>

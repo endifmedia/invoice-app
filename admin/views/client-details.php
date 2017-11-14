@@ -115,5 +115,9 @@
 			<th><label for="client-website">Website</label></th>
 			<td><input type="url" name="client-website" id="client-website" value="" class="regular-text"></td>
 		</tr>
+		<tr class="">
+			<th><label for="client-hourly-rate"><?php _e('Hourly Rate', 'invoice-app'); ?></label></th>
+			<td><input type="decimal" name="client-hourly-rate" id="client-hourly-rate" min="0" max="9999" step="0.01" size="4" value="" class="small-text"></td>
+		</tr>
 	</tbody>
 </table>
