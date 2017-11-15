@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Invoice App
  * Plugin URI:        http://endif.media
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Description:       A WordPress invoicing plugin for creating invoices and quotes.
+ * Version:           1.0.5
  * Author:            Ethan Allen
  * Author URI:        http://endif.media/invoice-app
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * This action is documented in includes/class-invoice-app-activator.php
  */
 function activate_invoice_app() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-invoice-app-activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
 	Invoice_App_Activator::activate();
 }
 
@@ -44,7 +44,7 @@ function activate_invoice_app() {
  * This action is documented in includes/class-invoice-app-deactivator.php
  */
 function deactivate_invoice_app() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-invoice-app-deactivator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
 	Invoice_App_Deactivator::deactivate();
 }
 

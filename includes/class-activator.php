@@ -40,13 +40,15 @@ class Invoice_App_Activator {
 			$default_options = array(
 				'business_name' => '',
 				'business_address' => '',
+				'business_phone' => '',
 				'business_website' => '',
  				'quote_life' => '30',
 				'invoice_offset' => '',
 				'invoice_notes' => __('due upon reciept'),
 				'invoice_terms' => __('30 days'),
 				'tax_rate' => '0',
-				'currency_code' => 'USD'
+				'currency_code' => 'USD',
+				'individual_client_rate' => ''
 			);
 			update_option( 'invoice_app_settings', $default_options );
 		}
