@@ -32,7 +32,7 @@ if (! empty($line_items = get_post_meta($post->ID, 'invoice_line_items', true) )
 			$it = 0;
 			foreach ($line_items as $line_item){
 				echo '<tr id="clonedInput-' . $it . '" class="clonedInput invoice-line-item">';
-				echo '<td><button type="button" class="remove"><i class="fa fa-minus-circle"></i></button></td>';
+				echo '<td><button type="button" class="remove"><span class="dashicons dashicons-minus"></span></button></td>';
 				echo '<td><input type="text" name="line-item[' . $it . '][description]" id="line-item-description" class="large-text" value="' . $line_item['description'] . '"></td>';
 				echo '<td><input type="text" name="line-item[' . $it . '][qty]" id="line-item-qty" class="large-text numeric line-item-qty" value="' . $line_item['qty'] . '" ></td>';
 				echo '<td><input type="text" size="4" name="line-item[' . $it . '][rate]" id="line-item-rate" class="numeric line-item-rate" value="' . $line_item['rate'] . '" ></td>';
@@ -95,7 +95,7 @@ if (! empty($line_items = get_post_meta($post->ID, 'invoice_line_items', true) )
 	</thead>
 	<tbody>
 		<tr id="clonedInput-0" class="clonedInput invoice-line-item">
-	        <td><button type="button" class="remove"><i class="fa fa-minus-circle"></i></button></td>		
+	        <td><button type="button" class="remove"><span class="dashicons dashicons-minus"></span></button></td>
 	        <td><input type="text" name="line-item[0][description]" id="line-item-description" class="large-text" value=""></td>
 			<td><input type="text" name="line-item[0][qty]" id="line-item-qty" class="large-text numeric line-item-qty" value=""></td>
 			<td><input type="text" size="4" name="line-item[0][rate]" id="line-item-rate" class="line-item-rate numeric" value=""></td>

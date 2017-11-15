@@ -26,7 +26,7 @@
 
         var header_row_template =
         '<tr id="clonedInput-' + row_key + '" class="clonedInput invoice-line-item">' +
-	    '<td><button type="button" class="remove"><i class="fa fa-minus-circle"></i></button></td>' +		
+	    '<td><button type="button" class="remove"><span class="dashicons dashicons-minus"></span></button></td>' +
 	    '<td><input type="text" name="line-item[' + row_key + '][description]" id="line-item-description" class="large-text" value=""></td>' +
 		'<td><input type="text" name="line-item[' + row_key + '][qty]" id="line-item-qty" class="large-text numeric line-item-qty" value=""></td>' +
 		'<td><input type="text" size="4" name="line-item[' + row_key + '][rate]" id="line-item-rate" class="line-item-rate numeric" value=""></td>' +
