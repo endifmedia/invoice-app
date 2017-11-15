@@ -118,5 +118,11 @@ global $post;
 			<th><label for="client-website">Website</label></th>
 			<td><input type="url" name="client-website" id="client-website" value="<?php echo get_post_meta( $post->ID, 'client_website', true ); ?>" class="regular-text"></td>
 		</tr>
+		<?php if (!empty($this->plugin_settings['individual_client_rate']) && $this->plugin_settings['individual_client_rate'] === 1)  { ?>
+		<tr class="">
+			<th><label for="client-hourly-rate"><?php _e('Hourly Rate', 'invoice-app'); ?></label></th>
+			<td><input type="number" name="client-hourly-rate" id="client-hourly-rate" min="0" max="9999" step="0.01" size="4" value="<?php echo get_post_meta( $post->ID, 'client_hourly_rate', true ); ?>" class="small-text"></td>
+		</tr>
+		<?php } ?>
 	</tbody>
 </table>

@@ -21,6 +21,7 @@ global $post;
 			<th><label for="invoice-client">Client</th>
 			<td>
 			    <select name="invoice-client">
+				    <option>--</option>
 			    	<?php 
 						$clients = invoice_app_get_clients();
 						foreach($clients as $client){

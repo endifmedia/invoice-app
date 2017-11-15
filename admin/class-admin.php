@@ -218,7 +218,7 @@ class Invoice_App_Admin {
 						'id'   => 'quote_life',
 						'label' => __( 'Quote Life', 'invoice-app' ),
 						'desc' => __( 'days', 'invoice-app' ),
-						'type' => 'text',
+						'type' => 'number',
 						'size' => 'small',
 					),			
 				)
@@ -284,21 +284,15 @@ class Invoice_App_Admin {
 							'THB' => 'Thai Baht',
 							'TRY' => 'Turkish Lira',
 						)
-					),		
+					),
+					'individual_client_rate' => array(
+							'id'   => 'individual_client_rate',
+							'label' => __( 'Individual Rates per Client?', 'invoice-app' ),
+							'desc' => __( 'Turn on rate settings for individal clients. If you charge different hourly rates per client. <small><i>Clients > Add New > Hourly Rate</i></small>', 'invoice-app' ),
+							'type' => 'checkbox'
+					),
 				)	
-			),
-			/*'misc' => apply_filters('invoice_app_settings_misc',
-				array(
-					'quote_life' => array(
-						'id'   => 'quote_life',
-						'label' => __( 'Quote Life', 'invoice-app' ),
-						'desc' => __( '', 'invoice-app' ),
-						'type' => 'number',
-						'size' => 'small',
-						'type' => 'text',
-					),		
-				)
-			)*/
+			)
 
 	);
     return apply_filters( 'invoice_app_settings_group', $options );
@@ -624,6 +618,11 @@ class Invoice_App_Admin {
         	    if ( isset( $_REQUEST['client-website'] ) ) {
 			        update_post_meta( $post_id, 'client_website', sanitize_text_field( $_REQUEST['client-website'] ) );
 			    }
+		        if ( isset( $_REQUEST['client-website'] ) ) {
+			        $rate = money_format('%i', $_REQUEST['client-hourly-rate']);
+			        update_post_meta( $post_id, 'client_hourly_rate', sanitize_text_field($rate) );
+		        }
+
         		break;
 
         	case 'invoice_app_quotes':
@@ -1128,6 +1127,16 @@ class Invoice_App_Admin {
 	            update_post_meta( $invoice->post_id, 'invoice_status', 'overdue' );
 	        }
 	    }
+	}
+
+	/**
+	 *
+	 */
+	public function lookup_client_rate() {
+		$client = sanitize_text_field($_REQUEST['client']);
+		$result = invoice_app_get_client_details_by_name($client);
+		echo $result['client_hourly_rate'][0];
+		exit;
 	}
 
 }

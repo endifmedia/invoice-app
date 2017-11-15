@@ -171,6 +171,7 @@ class Invoice_App {
 		$this->loader->add_action( 'views_edit-invoice_app_invoices', $plugin_admin, 'edit_subsubsub_links' );
 		$this->loader->add_action( 'views_edit-invoice_app_quotes', $plugin_admin, 'edit_subsubsub_links' );
 		$this->loader->add_action( 'wp_ajax_get_preview', $plugin_admin, 'get_pdf_preview' );
+		$this->loader->add_action( 'wp_ajax_after_change_client_on_invoice', $plugin_admin, 'lookup_client_rate' );
 
 		$this->loader->add_filter( 'manage_invoice_app_clients_posts_columns', $plugin_admin, 'edit_client_post_list' );
 		$this->loader->add_action( 'manage_invoice_app_clients_posts_custom_column', $plugin_admin, 'add_client_details_to_post_list', 10, 2 );

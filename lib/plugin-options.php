@@ -253,8 +253,23 @@ class Invoice_App_Plugin_Options {
 							         . esc_attr($this->plugin_settings[$field['id']])
 							         . '" class="color-field">
 				            ';
-							if (!emptu($field['desc']))
+							if (!empty($field['desc']))
 								$html .= '<br><small>' . __($field['desc'], sanitize_title($this->plugin_slug)) . '</small>';
+
+							break;
+
+						case 'phone':
+							$size = ( isset( $field['size'] ) && ! is_null( $field['size'] ) ) ? $field['size'] : 'regular';
+							$html .= '<input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" name="'
+							      . esc_attr($field['id']) .'" value="'
+							      . esc_attr($this->plugin_settings[$field['id']])
+							      . '" class="' . sanitize_html_class($size)
+							      . '-text">
+						     ';
+							if (!empty($field['desc']))
+								$html .= '<br><small>' . __($field['desc'], sanitize_title($this->plugin_slug)) . '</small>';
+
+							break;
 
 
 					}
