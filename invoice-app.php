@@ -30,6 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'INVOICEAPP_PLUGIN_VERSION', '1.0.5' );
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-invoice-app-activator.php

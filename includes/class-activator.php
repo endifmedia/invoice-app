@@ -36,7 +36,10 @@ class Invoice_App_Activator {
 			wp_schedule_event( time(), 'daily', 'invoice_app_overdue_check' );
 		
 		}
-		if (!get_option('invoice_app_settings')){
+
+		$options = get_option('invoice_app_settings');
+
+		if (empty($options)){
 			$default_options = array(
 				'business_name' => '',
 				'business_address' => '',
@@ -51,6 +54,11 @@ class Invoice_App_Activator {
 				'individual_client_rate' => ''
 			);
 			update_option( 'invoice_app_settings', $default_options );
+		}
+
+		if (empty($options['individual_client_rate'])) {
+			$options['individual_client_rate'] = '';
+			update_option( 'invoice_app_settings', $options );
 		}
 
 	}

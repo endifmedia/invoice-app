@@ -59,7 +59,7 @@ class Invoice_App_Admin {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version = INVOICEAPP_PLUGIN_VERSION;
 		$this->plugin_settings = get_option('invoice_app_settings');
 		$this->options = new Invoice_App_Plugin_Options('Invoice App', 'invoice_app_settings', 'invoice_app_settings');
 
