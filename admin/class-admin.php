@@ -79,8 +79,7 @@ class Invoice_App_Admin {
 		 * class.
 		 */
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'jquery-ui-datepicker', plugins_url( 'css/jquery.ui.datepicker.css', __FILE__ ) );
-		wp_enqueue_style( 'font-awesome', plugins_url('css/font-awesome.min.css', __FILE__) );
+		wp_enqueue_style( $this->plugin_name . '-jquery-ui-datepicker', plugin_dir_url( __FILE__ ) . 'css/jquery.ui.datepicker.css');
 	}
 
 	/**
