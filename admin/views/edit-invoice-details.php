@@ -58,10 +58,11 @@ global $post;
 			<td>
 				<select name="invoice-status">
 					<?php $status = get_post_meta( $post->ID, 'invoice_status', true );?>
-					<option></option>
+					<option>--</option>
 					<option value="paid" <?php selected( $status, 'paid'); ?>>Paid</option>
 					<option value="sent" <?php selected( $status, 'sent'); ?>>Sent</option>
-					<option value="overdue" <?php selected( $status, 'overdue'); ?>>Overdue</option>	
+					<option value="overdue" <?php selected( $status, 'overdue'); ?>>Overdue</option>
+					<option value="unpaid" <?php selected( $status, 'unpaid'); ?>>Unpaid (loss)</option>
 				</select>
 			</td>
 		</tr>

@@ -801,15 +801,20 @@ class Invoice_App_Admin {
 		//get statuses
         $statuses = $this->invoice_app_get_statuses($type);
         $active = '';
-		foreach ( $statuses as $status ) {
 
-			if ( $status->count != 0 ){ 
-		    $views[$status->status] = '<a href="' . esc_url( add_query_arg( $type . '_status', $status->status, admin_url() . 'edit.php?post_type=invoice_app_invoices' ) ) . '"'
-		    				. $this->is_current_link($_GET[$type . '_status'], $status->status) 
-		    				.'>' 
-		    				. esc_html( ucfirst($status->status) ) 
-		    				. ' <span class="count">(' . esc_html( $status->count ) 
-		    				. ')</span></a>';
+		if ($statuses) {
+			foreach ( $statuses as $status ) {
+
+				if ( $status->count != 0 ) {
+
+					$class                    = ( ! empty( $_GET[ $type . '_status' ] ) ) ? $this->is_current_link( $_GET[ $type . '_status' ], $status->status ) : '';
+					$views[ $status->status ] = '<a href="' . esc_url( add_query_arg( $type . '_status', $status->status, admin_url() . 'edit.php?post_type=invoice_app_invoices' ) ) . '"'
+					                            . $class
+					                            . '>'
+					                            . esc_html( ucfirst( $status->status ) )
+					                            . ' <span class="count">(' . esc_html( $status->count )
+					                            . ')</span></a>';
+				}
 			}
 		}
     	return $views;
@@ -881,15 +886,21 @@ class Invoice_App_Admin {
 	 */
 	public function invoice_app_get_statuses($type) {
 
+		$values = array();
+
 		if ($type == 'quote')
 		    $values = array('sent', 'overdue');
 
 		if ($type == 'invoice')
-			 $values = array('paid', 'sent', 'overdue');
+			 $values = array('paid', 'sent', 'overdue', 'unpaid');
 
-		$count = array();
+		if (empty($values))
+			return false;
+
 		$i = 0;
+
 		foreach ($values as $value){
+			$count[$i] = new StdClass;
 		    $count[$i]->status = $value;
 		    $count[$i]->count = $this->invoice_app_get_count($type . '_status', $value);
 		    $i++;
