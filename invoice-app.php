@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * This action is documented in includes/class-invoice-app-activator.php
  */
 function activate_invoice_app() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-invoice-app-activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
 	Invoice_App_Activator::activate();
 }
 
