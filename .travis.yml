@@ -1,38 +1,31 @@
-# Main Travis CI configuration file for wordpress-plugin tests
-# https://github.com/benbalter/wordpress-plugin-tests
+# This uses newer and faster docker based build system
+sudo: false
 
-# Tell Travis CI we're using PHP
 language: php
 
-# Versions of PHP to test against
+notifications:
+  on_success: never
+  on_failure: change
+
 php:
   - nightly # PHP 7.0
-  - 7.0
   - 5.6
   - 5.5
   - 5.4
-  - 5.3
-  
-# Specify versions of WordPress to test against
-# WP_VERSION = WordPress version number (use "master" for SVN trunk)
-# WP_MULTISITE = whether to test multisite (use either "0" or "1")
+
 env:
-    - WP_VERSION=master WP_MULTISITE=0
-    - WP_VERSION=3.4.1 WP_MULTISITE=0
-    - WP_VERSION=4.7 WP_MULTISITE=0
-    - WP_VERSION=4.6 WP_MULTISITE=1
-    - WP_VERSION=master WP_MULTISITE=1
-    - WP_VERSION=3.8 WP_MULTISITE=1
+  - WP_PROJECT_TYPE=plugin WP_VERSION=latest WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test
 
-# Grab the setup script and execute
-#before_script:
-#    - wget https://raw.github.com/benbalter/wordpress-plugin-tests/setup/setup.sh
-#    - source setup.sh
+matrix:
+  allow_failures:
+    - php: nightly
 
-#script: phpunit
+before_script:
+  # Install composer packages before trying to activate themes or plugins
+  # - composer install
 
-# wordpress-plugin-tests specific config
-# Tells Travis CI not to run unit tests against the setup branch
-#branches:
-#  except:
-#    - setup
+  - git clone https://github.com/Koodimonni/wordpress-test-template wp-tests
+  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
+
+script:
+  - phpcs --standard=WordPress ./**/*.php
