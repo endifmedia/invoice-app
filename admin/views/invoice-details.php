@@ -77,6 +77,8 @@ $invoice_app_settings = get_option('invoice_app_settings');
 		</tr>
 	</tbody>
 </table>
+
+<?php if (!empty($this->plugin_settings['individual_client_rate']) && $this->plugin_settings['individual_client_rate'] === 1)  { ?>
 <script type="text/javascript">
 
 	function get_client_rate() {
@@ -98,3 +100,4 @@ $invoice_app_settings = get_option('invoice_app_settings');
 	jQuery("body").delegate("select[name=invoice-client]","blur", get_client_rate);
 
 </script>
+<?php } ?>
